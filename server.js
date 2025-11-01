@@ -14,4 +14,9 @@ app.listen(PORT, () => {
 
 app.get('/about', (req,res) => {
   res.send('This is the About page.')
+});
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
 })
