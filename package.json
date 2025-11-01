@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/FredrickOguya/Full-Stack-AI-Integration/issues"
   },
-  "homepage": "https://github.com/FredrickOguya/Full-Stack-AI-Integration#readme"
+  "homepage": "https://github.com/FredrickOguya/Full-Stack-AI-Integration#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
