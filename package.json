@@ -1,0 +1,20 @@
+{
+  "name": "full-stack-ai-integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FredrickOguya/Full-Stack-AI-Integration.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FredrickOguya/Full-Stack-AI-Integration/issues"
+  },
+  "homepage": "https://github.com/FredrickOguya/Full-Stack-AI-Integration#readme"
+}
