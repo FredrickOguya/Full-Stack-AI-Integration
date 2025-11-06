@@ -2,19 +2,20 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-//Middleware to allow json data
-app.use(express.json());
-
-// GET route -for reading data
-app.get('/hello', (req,res) => {
-  const name = req.query.name;// read from URL
-  res.send(`Hello, ${name}!`);
+//Middleware (runs for all routes)
+app.use((req,res,next) => {
+  console.log(`${req.method} request made to ${req.url}`);
+  next();
 });
 
-//POST route - for sending data
-app.post('/user', (req,res) => {
-  const {name, age} = req.body; // read JSON data
-  res.json({message: `User ${name}, age ${age}, added successfully`})
+// Route 1
+app.get('/',(req,res) => {
+  res.send('Welcome to the homepage');
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT} `));
+// Route 2
+app.post('/users', (req, res) => {
+  res.json({message: 'New user added succesfully'});
+})
+
+app.listen(PORT,()=> console.log(`server running on port ${PORT}`));
