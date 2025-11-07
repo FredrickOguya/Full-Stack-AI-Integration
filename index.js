@@ -1,6 +1,14 @@
+import express from "express";
+import { configDotenv } from "dotenv";
+
 const express = require('express');
 const app = express();
-const PORT = 3000;
+
+configDotenv(); // load environment variables
+
+const PORT = process.env.PORT || 3000;
+const APP_NAME = process.env.APP_NAME;
+
 
 //Middleware (runs for all routes)
 app.use((req,res,next) => {
