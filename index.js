@@ -1,29 +1,32 @@
-import express from "express";
-import { configDotenv } from "dotenv";
+import express from 'express';
+import { configDotenv } from 'dotenv';
 
-const express = require('express');
+configDotenv();
+
 const app = express();
+app.use(express.json());
 
-configDotenv(); // load environment variables
+//sample route with try-catch
+app.get("/divide", (req,res, next) => {
+  try {
+    const { a,b } = req.query;
+    if(!a || !b) throw new Error("Both 'a' and 'b' are required.");
+    if(b == 0) throw new Error("Cannot divide by zero.");
+    const result = Number(a) / Number(b);
+    res.json({ result });
+  } catch (err) {
+    next(err); //pass error to middleware
+  }
+});
+
+// Global error-handling middleware
+app.use((err, req, res, next) => {
+  console.error("Error: ", err.message);
+  res.status(400).json({
+    success: false,
+    message: err.message || "Something went wrong.",
+  });
+});
 
 const PORT = process.env.PORT || 3000;
-const APP_NAME = process.env.APP_NAME;
-
-
-//Middleware (runs for all routes)
-app.use((req,res,next) => {
-  console.log(`${req.method} request made to ${req.url}`);
-  next();
-});
-
-// Route 1
-app.get('/',(req,res) => {
-  res.send('Welcome to the homepage');
-});
-
-// Route 2
-app.post('/users', (req, res) => {
-  res.json({message: 'New user added succesfully'});
-})
-
-app.listen(PORT,()=> console.log(`server running on port ${PORT}`));
+app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))
