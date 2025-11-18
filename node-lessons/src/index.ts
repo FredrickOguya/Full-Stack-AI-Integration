@@ -1,24 +1,17 @@
-import type { Request, Response } from 'express';
+import productRoutes from './routes/productRoutes'
+import userRoutes from './routes/userRoutes'
 const express = require('express');
-
-// 1. Create the application
 const app = express();
+
 const port = 3000;
 
-// 2. Define a route
-// When someone visits the root URL ('/'), do this:
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello! I am a server running with TypeScript.');
-});
+app.use(express.json());
 
-// 3. Start the server
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+//2. Mount the routes
+// This says: "If any requests starts with /Users, go to userRoutes"
+app.use('/users',userRoutes);
+app.use('/products',productRoutes);
 
-app.get('/about', (req: Request, res: Response)=>{
-  res.json({
-    "name": "Fredrick Onyango",
-    "stack": ["React", "TypeScript", "Node"]
-  })
-})
+app.listen(port, ()=> {
+  console.log(`Server running on http://localhost:${port}`)
+});
